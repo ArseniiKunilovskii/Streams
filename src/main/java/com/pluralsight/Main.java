@@ -10,6 +10,9 @@ public class Main {
         Scanner scanner = new Scanner(System.in);
         String input;
         int totalAge = 0;
+        int youngest = 100;
+        int oldest = 0;
+        int curAge = 0;
 
         ArrayList<Person> people = new ArrayList<>();
         ArrayList<Person> foundPeople = new ArrayList<>();
@@ -41,10 +44,20 @@ public class Main {
             }
             System.out.println("People with name " + input);
             for (Person person: foundPeople){
+                curAge = person.getAge();
                 System.out.println(person.toString());
-                totalAge += person.getAge();
+                totalAge += curAge;
+                if(curAge > oldest){
+                    oldest =curAge;
+                }
+                if (curAge<youngest){
+                    youngest=curAge;
+                }
+
             }
             System.out.println("Average age is " + (totalAge/foundPeople.size()));
+            System.out.println("Youngest is " + youngest + " years old");
+            System.out.println("Oldest is " + oldest + " years old");
         }
 
     }
