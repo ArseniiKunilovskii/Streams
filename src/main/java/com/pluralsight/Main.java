@@ -41,7 +41,7 @@ public class Main {
             }
             System.out.println("People with name " + input);
             for (Person person: foundPeople){
-                System.out.println(person);
+                System.out.println(person.toString());
                 totalAge += person.getAge();
             }
             System.out.println("Average age is " + (totalAge/foundPeople.size()));
