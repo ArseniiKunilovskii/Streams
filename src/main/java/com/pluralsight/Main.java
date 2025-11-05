@@ -8,40 +8,34 @@ import java.util.stream.Collectors;
 
 public class Main {
     public static void main(String[] args) {
-//        boolean done = false;
-//        Scanner scanner = new Scanner(System.in);
-//        String input;
-//
-//        ArrayList<Person> people = getPeople();
-//        ArrayList<Person> foundPeople;
-//
-//        while(!done){
-//            System.out.println("Please enter name: (0 to exit)");
-//            input = scanner.nextLine();
-//            if(input.equalsIgnoreCase("0")){
-//                done = true;
-//                break;
-//            }
-//            else {
-//                foundPeople = getSameName(input, people);
-//            }
-//            System.out.println("People with name " + input);
-//            printPeople(foundPeople);
-//            getAverageAge(foundPeople);
-//            findYoungest(foundPeople);
-//            findOldest(foundPeople);
-//        }
-//        String lastInput = scanner.nextLine();
-//        ArrayList<Person> matchingPeople = people.stream()
-//                .filter(person -> person.getLastName().equalsIgnoreCase(lastInput))
-//                .collect(Collectors.toCollection(ArrayList::new));
-//        matchingPeople.forEach(System.out::println);
-//
-        List<Integer> numbers = Arrays.asList(3, 2, 2, 3, 7, 3, 5);
-// get the sum of all numbers
-        int sum = numbers.stream()
-                .reduce(0, (temp, num)-> temp += num);
-        System.out.println(sum);
+        boolean done = false;
+        Scanner scanner = new Scanner(System.in);
+        String input;
+
+        ArrayList<Person> people = getPeople();
+        ArrayList<Person> foundPeople;
+
+        while(!done){
+            System.out.println("Please enter name: (0 to exit)");
+            input = scanner.nextLine();
+            if(input.equalsIgnoreCase("0")){
+                done = true;
+                break;
+            }
+            else {
+                String finalInput = input;
+                foundPeople = people.stream().filter(person -> person.getLastName().equalsIgnoreCase(finalInput)).collect(Collectors.toCollection(ArrayList::new));
+                foundPeople.forEach(System.out::println);
+                System.out.println("People with name " + input);
+                List<Integer> age = foundPeople.stream().map(Person::getAge).toList();
+                int totalAge = age.stream().reduce(0,(temp, curAge) -> temp+=curAge);
+                System.out.println("Average age is "  + totalAge/foundPeople.size());
+                System.out.println("Youngest is " + age.stream().sorted().toList().get(0));
+                System.out.println("Oldest is " + age.stream().sorted().toList().get(age.size()-1));
+                findOldest(foundPeople);
+            }
+
+        }
     }
     public static ArrayList<Person> getPeople(){
         ArrayList<Person> people = new ArrayList<>();
